@@ -8,8 +8,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.IFollower;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import frc.robot.RobotContainer;
 import frc.robot.commands.*;
@@ -21,25 +24,39 @@ public class DriveTrain extends SubsystemBase {
   /**
    * Creates a new DriveTrain.
    */
-  //drivetrain decives
-  private TalonSRX leftMasterSrx = new TalonSRX(1);
-  private TalonSRX leftSlaveSrx = new TalonSRX(2);
-  private TalonSRX leftSlaveSrx2 = new TalonSRX(3);
+  // drivetrain decives
+  private WPI_TalonSRX leftMasterSrx = new WPI_TalonSRX(1);
+  private WPI_TalonSRX leftSlaveSrx = new WPI_TalonSRX(2);
+  private WPI_TalonSRX leftSlaveSrx2 = new WPI_TalonSRX(3);
 
-  private TalonSRX rightMasterSrx = new TalonSRX(4);
-  private TalonSRX rightSlaveSrx = new TalonSRX(5);
-  private TalonSRX rightSlaveSrx2 = new TalonSRX(6);
+  private WPI_TalonSRX rightMasterSrx = new WPI_TalonSRX(4);
+  private WPI_TalonSRX rightSlaveSrx = new WPI_TalonSRX(5);
+  private WPI_TalonSRX rightSlaveSrx2 = new WPI_TalonSRX(6);
+  
+  private final DifferentialDrive m_Drive;
+
  
-  public DifferentialDrive drive = new DifferentialDrive(leftMasterSrx, rightMasterSrx);
 
   public DriveTrain() {
     setDefaultCommand(new DriveManual(this));
-   
+
     rightSlaveSrx.follow(rightMasterSrx);
     rightSlaveSrx2.follow(rightMasterSrx);
     leftSlaveSrx.follow(leftMasterSrx);
     leftSlaveSrx2.follow(leftMasterSrx);
-    
+
+    rightSlaveSrx.setInverted(false);
+    rightSlaveSrx2.setInverted(false);
+    leftSlaveSrx.setInverted(false);
+    leftSlaveSrx2.setInverted(false);
+
+    rightSlaveSrx.setNeutralMode(NeutralMode.Brake);
+    rightSlaveSrx2.setNeutralMode(NeutralMode.Brake);
+    leftSlaveSrx.setNeutralMode(NeutralMode.Brake);
+    leftSlaveSrx2.setNeutralMode(NeutralMode.Brake);
+
+    m_Drive = new DifferentialDrive(leftMasterSrx, rightMasterSrx);
+
   }
 
   @Override
@@ -47,8 +64,8 @@ public class DriveTrain extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void driveCurvature(double speed, double rotation, boolean quickTurn){
-    m_drive.set(ControlMode.PercentOutput, speed , rotation, quickTurn );
-    m_drive.curvatureDrive(ControlMode.PercentOutput, speed , rotation, quickTurn);
+  public void driveCurvature(double speed, double rotation, boolean quickTurn) {
+    driveCurvature(speed, rotation, quickTurn);
+    
   }
 }

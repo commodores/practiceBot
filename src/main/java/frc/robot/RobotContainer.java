@@ -9,12 +9,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -33,6 +35,21 @@ public class RobotContainer {
 
   //joysticks
   public Joystick joy1 = new Joystick(0);
+  JoystickButton btn1 = new JoystickButton(joy1, 1);
+  JoystickButton btn2 = new JoystickButton(joy1, 2);
+  JoystickButton btn3 = new JoystickButton(joy1, 3);
+  JoystickButton btn4 = new JoystickButton(joy1, 4);
+  JoystickButton btn5 = new JoystickButton(joy1, 5);
+  JoystickButton btn6 = new JoystickButton(joy1, 6);
+  JoystickButton btn7 = new JoystickButton(joy1, 7);
+  JoystickButton btn8 = new JoystickButton(joy1, 8);
+  JoystickButton btn9 = new JoystickButton(joy1, 9);
+  JoystickButton btn10 = new JoystickButton(joy1, 10);
+  JoystickButton btn11 = new JoystickButton(joy1, 11);
+  JoystickButton btn12 = new JoystickButton(joy1, 12);
+
+
+  
 
 
 
@@ -42,6 +59,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    
   }
 
   /**
@@ -51,6 +69,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    
+    
   }
 
 
@@ -65,6 +85,12 @@ public class RobotContainer {
   }
 
 public static GenericHID Joystick() {
-	return null;
+  
+  return null;
+  
+}
+public static XboxController Joystick0(){
+  
+  return null;
 }
 }
